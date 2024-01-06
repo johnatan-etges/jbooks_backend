@@ -1,11 +1,12 @@
 import { InvalidParamError } from "../../shred/errors/invalid-param-error";
 import { Author } from "../author.valueobject";
+import { Subject } from "../subject.valueobject";
 import { InvalidNumberOfCopiesError } from "./errors/invalid-number-of-copies-error";
 
 export class Title {
   private _isbn: number;
   private _author: Author;
-  private _subject: string;
+  private _subject: Subject;
   private _copiesInStock: number;
 
   constructor(
@@ -24,7 +25,7 @@ export class Title {
 
     this._isbn = isbn;
     this._author = new Author(author);
-    this._subject = subject;
+    this._subject = new Subject(subject);
     this._copiesInStock = copiesInStock;
   }
 
@@ -37,7 +38,7 @@ export class Title {
   }
 
   get subject(): string {
-    return this._subject;
+    return this._subject.value;
   }
 
   get copiesInStock(): number {
