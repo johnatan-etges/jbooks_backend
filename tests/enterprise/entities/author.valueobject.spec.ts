@@ -7,6 +7,12 @@ describe("Author", () => {
 
     expect(sut).toThrow(new InvalidParamError("Author name"));
   });
+
+  it("Should return InvalidParamError if name is greater than 50 caracters long", () => {
+    const sut = () => new Author("AbcdefghijklmnopqrstuvxyzAbcdefghijklmnopqrstuvxyzAbcdefghijklmnopqrstuvxyz");
+
+    expect(sut).toThrow(new InvalidParamError("Author name"));
+  });
   
   it("Should return InvalidParamError if name contains numbers", () => {
     const sut = () => new Author("A2b");

@@ -8,6 +8,10 @@ export class Author {
       throw new InvalidParamError("Author name");
     }
 
+    if (value.length > 50) {
+      throw new InvalidParamError("Author name");
+    }
+
     /*
       Name shouldn't contain numbers and symbols, excpet by whitespaces and apostrophes
       ^: Start of string.
