@@ -4,11 +4,7 @@ export class Subject {
   private _value: string;
 
   constructor(value: string) {
-    if (value.length < 3) {
-      throw new InvalidParamError("Subject");
-    }
-
-    if (value.length > 50) {
+    if (value.length < 3 || value.length > 50) {
       throw new InvalidParamError("Subject");
     }
 

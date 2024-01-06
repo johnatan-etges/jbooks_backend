@@ -4,14 +4,6 @@ export class Author {
   private _value: string;
 
   constructor(value: string) {
-    if (value.length < 3) {
-      throw new InvalidParamError("Author name");
-    }
-
-    if (value.length > 50) {
-      throw new InvalidParamError("Author name");
-    }
-
     /*
       Name shouldn't contain numbers and symbols, excpet by whitespaces and apostrophes
       ^: Start of string.
@@ -22,7 +14,7 @@ export class Author {
     */
     const regexPattern = /^[a-zA-Z\s\']+$/;
 
-    if (!regexPattern.test(value)) {
+    if (value.length < 3 || value.length > 50 || !regexPattern.test(value)) {
       throw new InvalidParamError("Author name");
     }
 
