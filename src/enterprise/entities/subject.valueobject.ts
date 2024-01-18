@@ -1,4 +1,4 @@
-import { InvalidParamError } from "../shred/errors/invalid-param-error";
+import { InvalidParamError } from "../shared/errors/invalid-param-error";
 
 export class Subject {
   private _value: string;
