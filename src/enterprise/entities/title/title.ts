@@ -44,4 +44,8 @@ export class Title {
   get copiesInStock(): number {
     return this._copiesInStock;
   }
+
+  public canBePurchased(): boolean {
+    return this._copiesInStock > 0;
+  }
 }

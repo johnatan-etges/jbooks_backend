@@ -11,6 +11,7 @@ const anySubject = "Any Subject";
 const invalidNumberOfCopies = -1;
 const validNumberOfCopies = 1;
 const anyNumberOfCopies = 0;
+const zeroCopies = 0;
 
 describe("Title", () => {
   describe("ISBN", () => {
@@ -61,5 +62,19 @@ describe("Title", () => {
 
       expect(sut.copiesInStock).toBe(validNumberOfCopies);
     });
+  });
+
+  it("Should return false if title can't be purchased", () => {
+    const sut = new Title(validISBN, anyAuthor, validSubject, zeroCopies);
+    const canTitleBePurchased = sut.canBePurchased();
+
+    expect(canTitleBePurchased).toBe(false);
+  });
+
+  it("Should return true if title can be purchased", () => {
+    const sut = new Title(validISBN, validAuthor, validSubject, validNumberOfCopies);
+    const canTitleBePurchased = sut.canBePurchased();
+
+    expect(canTitleBePurchased).toBe(true);
   });
 });
