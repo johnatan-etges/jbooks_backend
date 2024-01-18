@@ -50,7 +50,7 @@ describe("Title", () => {
   });
 
   describe("Number of copies", () => {
-    it("Should return InvalidNumberOfCopiesError if number of copies in stock is lesser than zero units", () => {
+    it("Should return InvalidNumberOfCopiesError if number of copies in stock is lesser than zero", () => {
       const sut = () => new Title(validISBN, anyAuthor, anySubject, invalidNumberOfCopies);
 
       expect(sut).toThrow(new InvalidNumberOfCopiesError(invalidNumberOfCopies));
