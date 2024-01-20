@@ -3,6 +3,7 @@ import { CreateTitleUseCase } from "../../../../src/enterprise/application/useca
 import { Title } from "../../../../src/enterprise/entities/title/title";
 import { ServerError } from "../../../../src/enterprise/shared/errors/server-error";
 import { TitleInMemoryGateway } from "../../../../src/enterprise/infra/gateways/title/title-in-memory.gateway";
+import { TitleInMemoryGatewaySpyWithError } from "../../../doubles/fakes/title/title-gateway-spy-with-error.fake";
 
 const baseTitle = new Title(1234567891011, 'Valid author', 'Valid subject', 0);
 
@@ -13,13 +14,9 @@ const makeTitleGatewaySpy = () => {
 }
 
 const makeTitleGatewaySpyWithError = () => {
-  class TitleInMemoryGateway implements TitleGateway {
-    async create(title: Title): Promise<void> {
-      throw new Error();    
-    }
-  }
+  
 
-  const titleInMemoryGateway = new TitleInMemoryGateway();
+  const titleInMemoryGateway = new TitleInMemoryGatewaySpyWithError();
 
   return titleInMemoryGateway;
 }
