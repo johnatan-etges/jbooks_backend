@@ -4,8 +4,7 @@ import { Title } from "../../../../src/enterprise/entities/title/title";
 import { TitleInMemoryGateway } from "../../../../src/enterprise/infra/gateways/title/title-in-memory.gateway";
 import { ServerError } from "../../../../src/enterprise/shared/errors/server-error";
 import { TitleInMemoryGatewaySpyWithError } from "../../../doubles/fakes/title/title-gateway-spy-with-error.fake";
-
-const baseTitle = new Title(1234567891011, 'Valid author', 'Valid subject', 0);
+import { validTitle } from "../../../doubles/assets/title/index.assets";
 
 const makeTitleGatewaySpy = () => {
   const titleGateway = new TitleInMemoryGateway();
@@ -31,11 +30,11 @@ describe("FindAllTitlesUseCase", () => {
     const sut = new FindAllTitlesUseCase(makeTitleGatewaySpy());
 
     const createTitleUseCase = new CreateTitleUseCase(makeTitleGatewaySpy());
-    const createdTitle = createTitleUseCase.execute(baseTitle);
+    const createdTitle = createTitleUseCase.execute(validTitle);
 
-    const expectedTitles = [baseTitle];
+    const expectedTitles = [validTitle];
     const actualTitles = await sut.execute();
 
-    expect(actualTitles).toEqual(actualTitles);
+    expect(actualTitles).toEqual(expectedTitles);
   });
 });
