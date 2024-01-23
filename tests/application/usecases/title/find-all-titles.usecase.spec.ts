@@ -5,18 +5,7 @@ import { TitleInMemoryGateway } from "../../../../src/enterprise/infra/gateways/
 import { ServerError } from "../../../../src/enterprise/shared/errors/server-error";
 import { TitleInMemoryGatewaySpyWithError } from "../../../doubles/fakes/title/title-gateway-spy-with-error.fake";
 import { validTitle } from "../../../doubles/assets/title/index.assets";
-
-const makeTitleGatewaySpy = () => {
-  const titleGateway = new TitleInMemoryGateway();
-
-  return titleGateway;
-}
-
-const makeTitleGatewaySpyWithError = () => {
-  const titleGateway = new TitleInMemoryGatewaySpyWithError();
-
-  return titleGateway;
-}
+import { makeTitleGatewaySpy, makeTitleGatewaySpyWithError } from "../../../doubles/fakes/title/index";
 
 describe("FindAllTitlesUseCase", () => {
   it("Should throw if dependency throws", async () => {

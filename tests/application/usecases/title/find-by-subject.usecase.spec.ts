@@ -6,18 +6,7 @@ import { InvalidParamError } from "../../../../src/enterprise/shared/errors/inva
 import { ServerError } from "../../../../src/enterprise/shared/errors/server-error";
 import { validTitle, validSubjectSearchExpressions, invalidSubjectSearchExpression, anySubjectSearchExpression, shortSubjectSearchExpression } from "../../../doubles/assets/title/index.assets";
 import { TitleInMemoryGatewaySpyWithError } from "../../../doubles/fakes/title/title-gateway-spy-with-error.fake";
-
-const makeTitleGatewaySpy = () => {
-  const titleGateway = new TitleInMemoryGateway();
-
-  return titleGateway;
-}
-
-const makeTitleGatewaySpyWithError = () => {
-  const titleGateway = new TitleInMemoryGatewaySpyWithError();
-
-  return titleGateway;
-}
+import { makeTitleGatewaySpy, makeTitleGatewaySpyWithError } from "../../../doubles/fakes/title/index";
 
 describe("FindBySubjectUseCase", () => {
   it("Should throw if dependency throws", async () => {
