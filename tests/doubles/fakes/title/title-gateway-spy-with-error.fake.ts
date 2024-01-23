@@ -9,4 +9,8 @@ export class TitleInMemoryGatewaySpyWithError implements TitleGateway {
   async findAll(): Promise<Title[]> {
     throw new Error();
   }
+
+  async findBySubject(subjectToSearch: string): Promise<Title[]> {
+    throw new Error();
+  }
 }

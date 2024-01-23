@@ -23,4 +23,18 @@ export class TitleInMemoryGateway implements TitleGateway {
 
     return clonedTitles;
   }
+
+  async findBySubject(subjectToSearch: string): Promise<Title[]> {
+    const foundTitles: Title[] = [];
+
+    TitleInMemoryGateway.titles.forEach(title => {
+      if (title.subject.toLowerCase().includes(subjectToSearch.toLowerCase())) {
+        foundTitles.push(
+          new Title(title.isbn, title.author, title.subject, title.copiesInStock)
+        );
+      }
+    });
+
+    return foundTitles;
+  }
 }

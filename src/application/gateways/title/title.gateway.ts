@@ -1,4 +1,4 @@
-import { Title } from "../../../entities/title/title";
+import { Title } from "../../../enterprise/entities/title/title";
 
 export interface TitleGateway {
   create(title: Title): Promise<void>;
