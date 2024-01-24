@@ -1,6 +1,6 @@
-import { Title } from "../../../entities/title/title";
-import { InvalidParamError } from "../../../shared/errors/invalid-param-error";
-import { ServerError } from "../../../shared/errors/server-error";
+import { Title } from "../../../enterprise/entities/title/title";
+import { InvalidParamError } from "../../../enterprise/shared/errors/invalid-param-error";
+import { ServerError } from "../../../enterprise/shared/errors/server-error";
 import { TitleGateway } from "../../gateways/title/title.gateway";
 
 export class FindBySubjectUseCase {

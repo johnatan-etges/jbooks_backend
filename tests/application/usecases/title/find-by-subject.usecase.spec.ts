@@ -1,5 +1,5 @@
-import { CreateTitleUseCase } from "../../../../src/enterprise/application/usecases/title/create-title.usecase";
-import { FindBySubjectUseCase } from "../../../../src/enterprise/application/usecases/title/find-by-subject.usecase";
+import { CreateTitleUseCase } from "../../../../src/application/usecases/title/create-title.usecase";
+import { FindBySubjectUseCase } from "../../../../src/application/usecases/title/find-by-subject.usecase";
 import { Title } from "../../../../src/enterprise/entities/title/title";
 import { TitleInMemoryGateway } from "../../../../src/enterprise/infra/gateways/title/title-in-memory.gateway";
 import { InvalidParamError } from "../../../../src/enterprise/shared/errors/invalid-param-error";

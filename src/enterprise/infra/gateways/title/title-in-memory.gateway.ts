@@ -1,5 +1,5 @@
 import { Title } from "../../../entities/title/title";
-import { TitleGateway } from "../../../application/gateways/title/title.gateway";
+import { TitleGateway } from "../../../../application/gateways/title/title.gateway";
 
 export class TitleInMemoryGateway implements TitleGateway {
   private static titles: Title[] = [];

@@ -1,5 +1,5 @@
 import { Title } from "../../../../src/enterprise/entities/title/title";
-import { TitleGateway } from "../../../../src/enterprise/application/gateways/title/title.gateway";
+import { TitleGateway } from "../../../../src/application/gateways/title/title.gateway";
 
 export class TitleInMemoryGatewaySpyWithError implements TitleGateway {
   async create(title: Title): Promise<void> {

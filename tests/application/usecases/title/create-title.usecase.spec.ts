@@ -1,5 +1,5 @@
-import { TitleGateway } from "../../../../src/enterprise/application/gateways/title/title.gateway";
-import { CreateTitleUseCase } from "../../../../src/enterprise/application/usecases/title/create-title.usecase";
+import { TitleGateway } from "../../../../src/application/gateways/title/title.gateway";
+import { CreateTitleUseCase } from "../../../../src/application/usecases/title/create-title.usecase";
 import { Title } from "../../../../src/enterprise/entities/title/title";
 import { ServerError } from "../../../../src/enterprise/shared/errors/server-error";
 import { TitleInMemoryGateway } from "../../../../src/enterprise/infra/gateways/title/title-in-memory.gateway";
