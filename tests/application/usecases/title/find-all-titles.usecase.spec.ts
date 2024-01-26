@@ -2,7 +2,7 @@ import { CreateTitleUseCase } from "../../../../src/application/usecases/title/c
 import { FindAllTitlesUseCase } from "../../../../src/application/usecases/title/find-all-titles.usecase";
 import { Title } from "../../../../src/enterprise/entities/title/title";
 import { TitleInMemoryGateway } from "../../../../src/enterprise/infra/gateways/title/title-in-memory.gateway";
-import { ServerError } from "../../../../src/enterprise/shared/errors/server-error";
+import { ServerError } from "../../../../src/shared/errors/server-error";
 import { TitleInMemoryGatewaySpyWithError } from "../../../doubles/fakes/title/title-gateway-spy-with-error.fake";
 import { validTitle } from "../../../doubles/assets/title/index.assets";
 import { makeTitleGatewaySpy, makeTitleGatewaySpyWithError } from "../../../doubles/fakes/title/index";

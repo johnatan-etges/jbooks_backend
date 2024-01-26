@@ -1,5 +1,5 @@
 import { Subject } from "../../../src/enterprise/entities/subject.valueobject";
-import { InvalidParamError } from "../../../src/enterprise/shared/errors/invalid-param-error";
+import { InvalidParamError } from "../../../src/shared/errors/invalid-param-error";
 
 describe("Book Subject", () => {
   it("Should return InvalidParamError if the subject is lesser than 3 caracters long", () => {

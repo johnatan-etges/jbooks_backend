@@ -2,8 +2,8 @@ import { CreateTitleUseCase } from "../../../../src/application/usecases/title/c
 import { FindBySubjectUseCase } from "../../../../src/application/usecases/title/find-by-subject.usecase";
 import { Title } from "../../../../src/enterprise/entities/title/title";
 import { TitleInMemoryGateway } from "../../../../src/enterprise/infra/gateways/title/title-in-memory.gateway";
-import { InvalidParamError } from "../../../../src/enterprise/shared/errors/invalid-param-error";
-import { ServerError } from "../../../../src/enterprise/shared/errors/server-error";
+import { InvalidParamError } from "../../../../src/shared/errors/invalid-param-error";
+import { ServerError } from "../../../../src/shared/errors/server-error";
 import { validTitle, validSubjectSearchExpressions, invalidSubjectSearchExpression, anySubjectSearchExpression, shortSubjectSearchExpression } from "../../../doubles/assets/title/index.assets";
 import { TitleInMemoryGatewaySpyWithError } from "../../../doubles/fakes/title/title-gateway-spy-with-error.fake";
 import { makeTitleGatewaySpy, makeTitleGatewaySpyWithError } from "../../../doubles/fakes/title/index";

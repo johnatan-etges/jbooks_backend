@@ -1,6 +1,6 @@
 import { InvalidNumberOfCopiesError } from "../../../../src/enterprise/entities/title/errors/invalid-number-of-copies-error";
 import { Title } from "../../../../src/enterprise/entities/title/title";
-import { InvalidParamError } from "../../../../src/enterprise/shared/errors/invalid-param-error";
+import { InvalidParamError } from "../../../../src/shared/errors/invalid-param-error";
 
 // Helpers
 const validISBN = 1234567891011;
