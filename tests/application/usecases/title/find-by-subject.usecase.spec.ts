@@ -1,8 +1,8 @@
 import { CreateTitleUseCase } from "../../../../src/application/usecases/title/create-title.usecase";
 import { FindBySubjectUseCase } from "../../../../src/application/usecases/title/find-by-subject.usecase";
 import { Title } from "../../../../src/enterprise/entities/title/title";
-import { InvalidParamError } from "../../../../src/shared/errors/invalid-param-error";
-import { ServerError } from "../../../../src/shared/errors/server-error";
+import { InvalidParamError } from "../../../../src/shared/errors";
+import { ServerError } from "../../../../src/shared/errors";
 import { validTitle, validSubjectSearchExpressions, invalidSubjectSearchExpression, anySubjectSearchExpression, shortSubjectSearchExpression } from "../../../doubles/assets/title/index.assets";
 import { makeTitleGatewaySpy, makeTitleGatewaySpyWithError } from "../../../doubles/fakes/title/index";
 

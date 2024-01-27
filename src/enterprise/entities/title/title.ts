@@ -1,4 +1,4 @@
-import { InvalidParamError } from "../../../shared/errors/invalid-param-error";
+import { InvalidParamError } from "../../../shared/errors";
 import { Author } from "../author.valueobject";
 import { Subject } from "../subject.valueobject";
 import { InvalidNumberOfCopiesError } from "./errors/invalid-number-of-copies-error";

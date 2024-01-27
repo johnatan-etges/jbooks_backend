@@ -1,7 +1,7 @@
 import { Title } from "../../../../src/enterprise/entities/title/title";
 import { TitleGateway } from "../../../../src/application/gateways/title/title.gateway";
 import { Either, left } from "../../../../src/shared/either";
-import { ServerError } from "../../../../src/shared/errors/server-error";
+import { ServerError } from "../../../../src/shared/errors";
 
 export class TitleInMemoryGatewaySpyWithError implements TitleGateway {
   async create(title: Title): Promise<void> {

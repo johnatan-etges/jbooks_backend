@@ -1,7 +1,6 @@
 import { Title } from "../../../enterprise/entities/title/title";
 import { Either, left, right } from "../../../shared/either";
-import { ResourceNotFoundError } from "../../../shared/errors/resource-not-found-error";
-import { ServerError } from "../../../shared/errors/server-error";
+import { ResourceNotFoundError, ServerError } from "../../../shared/errors";
 import { TitleGateway } from "../../gateways/title/title.gateway";
 
 export class FindByIsbnCodeUseCase {

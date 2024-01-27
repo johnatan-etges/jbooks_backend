@@ -1,5 +1,5 @@
 import { Author } from "../../../src/enterprise/entities/author.valueobject";
-import { InvalidParamError } from "../../../src/shared/errors/invalid-param-error";
+import { InvalidParamError } from "../../../src/shared/errors";
 
 describe("Author", () => {
   it("Should return InvalidParamError if name is lesser than 3 caracters long", () => {

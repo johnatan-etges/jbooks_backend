@@ -1,4 +1,4 @@
-import { InvalidParamError } from "../../shared/errors/invalid-param-error";
+import { InvalidParamError } from "../../shared/errors";
 
 export class Author {
   private _value: string;
