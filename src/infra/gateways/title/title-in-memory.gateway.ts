@@ -1,7 +1,7 @@
-import { Title } from "../../../entities/title/title";
-import { TitleGateway } from "../../../../application/gateways/title/title.gateway";
-import { Either, left, right } from "../../../../shared/either";
-import { ResourceNotFoundError } from "../../../../shared/errors/resource-not-found-error";
+import { Title } from "../../../enterprise/entities/title/title";
+import { TitleGateway } from "../../../application/gateways/title/title.gateway";
+import { Either, left, right } from "../../../shared/either";
+import { ResourceNotFoundError } from "../../../shared/errors/resource-not-found-error";
 
 export class TitleInMemoryGateway implements TitleGateway {
   private static titles: Title[] = [];

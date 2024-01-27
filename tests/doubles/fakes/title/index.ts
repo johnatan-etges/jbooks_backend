@@ -1,4 +1,4 @@
-import { TitleInMemoryGateway } from "../../../../src/enterprise/infra/gateways/title/title-in-memory.gateway";
+import { TitleInMemoryGateway } from "../../../../src/infra/gateways/title/title-in-memory.gateway";
 import { TitleInMemoryGatewaySpyWithError } from "./title-gateway-spy-with-error.fake";
 
 export const makeTitleGatewaySpy = () => {
