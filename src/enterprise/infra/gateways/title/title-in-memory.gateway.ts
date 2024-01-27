@@ -1,5 +1,7 @@
 import { Title } from "../../../entities/title/title";
 import { TitleGateway } from "../../../../application/gateways/title/title.gateway";
+import { Either, left, right } from "../../../../shared/either";
+import { ResourceNotFoundError } from "../../../../shared/errors/resource-not-found-error";
 
 export class TitleInMemoryGateway implements TitleGateway {
   private static titles: Title[] = [];
@@ -50,5 +52,21 @@ export class TitleInMemoryGateway implements TitleGateway {
       });
 
       return foundTitles;
+  }
+
+  async findByIsbnCode(isbnToSearch: number): Promise<Either<ResourceNotFoundError, Title>> {
+      const foundTitles: Title[] | any = TitleInMemoryGateway.titles.map(title => {
+        if (isbnToSearch === title.isbn) {
+          return new Title(title.isbn, title.author, title.subject, title.copiesInStock)
+        }
+      });
+      
+      const foundTitle:Title | any = foundTitles[0] || null;
+
+      if (!foundTitle) {
+        return left(new ResourceNotFoundError("Title"));
+      }
+
+      return right(foundTitle);
   }
 }
