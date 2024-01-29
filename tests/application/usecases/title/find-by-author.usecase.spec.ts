@@ -2,7 +2,7 @@ import { CreateTitleUseCase } from "../../../../src/application/usecases/title/c
 import { FindByAuthorUseCase } from "../../../../src/application/usecases/title/find-by-author.usecase";
 import { Title } from "../../../../src/enterprise/entities/title/title";
 import { InvalidParamError } from "../../../../src/shared/errors";
-import { ServerError } from "../../../../src/shared/errors";
+import { StorageServiceError } from "../../../../src/shared/errors";
 import { anyAuthorSearchExpression, invalidAuthorSearchExpression, shortAuthorSearchExpression, validAuthorSearchExpressions, validTitle } from "../../../doubles/assets/title/index.assets";
 import { makeTitleGatewaySpy, makeTitleGatewaySpyWithError } from "../../../doubles/fakes/title";
 
@@ -11,7 +11,7 @@ describe("FindByAuthorUseCase", () =>  {
     const sut = new FindByAuthorUseCase(makeTitleGatewaySpyWithError());
     const promise =  sut.execute(anyAuthorSearchExpression);
 
-    await expect(promise).rejects.toThrow(new ServerError());
+    await expect(promise).rejects.toThrow(new StorageServiceError());
   });
 
   it("Should return InvalidParamError if search expression is lesser than 3 characters long", async () => {

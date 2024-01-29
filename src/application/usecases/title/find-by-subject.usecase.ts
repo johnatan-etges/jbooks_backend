@@ -1,6 +1,6 @@
 import { Title } from "../../../enterprise/entities/title/title";
 import { InvalidParamError } from "../../../shared/errors";
-import { ServerError } from "../../../shared/errors";
+import { StorageServiceError } from "../../../shared/errors";
 import { TitleGateway } from "../../gateways/title/title.gateway";
 
 export class FindBySubjectUseCase {
@@ -20,7 +20,7 @@ export class FindBySubjectUseCase {
 
       return foundTitles;
     } catch(err) {
-      throw new ServerError();
+      throw new StorageServiceError();
     }
   }
 }

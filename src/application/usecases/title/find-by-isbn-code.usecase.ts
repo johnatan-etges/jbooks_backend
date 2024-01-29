@@ -1,6 +1,6 @@
 import { Title } from "../../../enterprise/entities/title/title";
 import { Either, left, right } from "../../../shared/either";
-import { ResourceNotFoundError, ServerError } from "../../../shared/errors";
+import { ResourceNotFoundError, StorageServiceError } from "../../../shared/errors";
 import { TitleGateway } from "../../gateways/title/title.gateway";
 
 export class FindByIsbnCodeUseCase {
@@ -10,8 +10,7 @@ export class FindByIsbnCodeUseCase {
     this._titleGateway = titleGateway;
   }
 
-  async execute(isbnToSearch: number): Promise<Either<ResourceNotFoundError | ServerError, Title>> {
-    try {
+  async execute(isbnToSearch: number): Promise<Either<ResourceNotFoundError | StorageServiceError, Title>> {
       const titleOrError = await this._titleGateway.findByIsbnCode(isbnToSearch);
 
       if ((titleOrError).isLeft()) {
@@ -21,8 +20,5 @@ export class FindByIsbnCodeUseCase {
       const foundTitle: Title = titleOrError.value;
 
       return right(foundTitle);
-    } catch(err) {
-      throw new ServerError()
-    }
   }
 }

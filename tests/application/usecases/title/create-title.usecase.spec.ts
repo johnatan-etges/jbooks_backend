@@ -1,5 +1,5 @@
 import { CreateTitleUseCase } from "../../../../src/application/usecases/title/create-title.usecase";
-import { ServerError } from "../../../../src/shared/errors";
+import { StorageServiceError } from "../../../../src/shared/errors";
 import { validTitle } from "../../../doubles/assets/title/index.assets";
 import { makeTitleGatewaySpy, makeTitleGatewaySpyWithError } from "../../../doubles/fakes/title/index";
 
@@ -8,7 +8,7 @@ describe("CreatetitleUseCase", () => {
     const sut = new CreateTitleUseCase(makeTitleGatewaySpyWithError());
     const promise = sut.execute(validTitle);
 
-    await expect(promise).rejects.toThrow(new ServerError());
+    await expect(promise).rejects.toThrow(new StorageServiceError());
   });
 
   it("should create the title", async () => {

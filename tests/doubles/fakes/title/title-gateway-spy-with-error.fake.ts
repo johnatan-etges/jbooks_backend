@@ -1,7 +1,7 @@
 import { Title } from "../../../../src/enterprise/entities/title/title";
 import { TitleGateway } from "../../../../src/application/gateways/title/title.gateway";
 import { Either, left } from "../../../../src/shared/either";
-import { ServerError } from "../../../../src/shared/errors";
+import { StorageServiceError } from "../../../../src/shared/errors";
 
 export class TitleInMemoryGatewaySpyWithError implements TitleGateway {
   async create(title: Title): Promise<void> {
@@ -20,6 +20,6 @@ export class TitleInMemoryGatewaySpyWithError implements TitleGateway {
     throw new Error();
   }
 
-  async findByIsbnCode(isbnToSearch: number): Promise<Either<ServerError, Title>> {
-    return left(new ServerError());  }
+  async findByIsbnCode(isbnToSearch: number): Promise<Either<StorageServiceError, Title>> {
+    return left(new StorageServiceError());  }
 }

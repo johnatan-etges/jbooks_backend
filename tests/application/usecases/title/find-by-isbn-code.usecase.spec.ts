@@ -14,7 +14,7 @@ describe("FindByIsbnCodeUseCase", () => {
 
     const promise = (await sut.execute(validIsbn)).value as Error;
 
-    expect(promise.name).toEqual("ServerError");
+    expect(promise.name).toEqual("StorageServiceError");
   });
 
   it("Should return ResourceNotFoundError if an invalid ISBN code is provided", async () => {

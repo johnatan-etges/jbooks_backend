@@ -1,5 +1,5 @@
 import { Title } from '../../../enterprise/entities/title/title'
-import { ServerError } from '../../../shared/errors';
+import { StorageServiceError } from '../../../shared/errors';
 import { TitleGateway } from "../../gateways/title/title.gateway";
 
 export class CreateTitleUseCase {
@@ -15,7 +15,7 @@ export class CreateTitleUseCase {
 
       return title;
     } catch(err) {
-      throw new ServerError();
+      throw new StorageServiceError();
     }
   }
 }

@@ -1,6 +1,6 @@
 import { CreateTitleUseCase } from "../../../../src/application/usecases/title/create-title.usecase";
 import { FindAllTitlesUseCase } from "../../../../src/application/usecases/title/find-all-titles.usecase";
-import { ServerError } from "../../../../src/shared/errors";
+import { StorageServiceError } from "../../../../src/shared/errors";
 import { validTitle } from "../../../doubles/assets/title/index.assets";
 import { makeTitleGatewaySpy, makeTitleGatewaySpyWithError } from "../../../doubles/fakes/title/index";
 
@@ -9,7 +9,7 @@ describe("FindAllTitlesUseCase", () => {
     const sut = new FindAllTitlesUseCase(makeTitleGatewaySpyWithError());
     const promise = sut.execute();
 
-    await expect(promise).rejects.toThrow(new ServerError());
+    await expect(promise).rejects.toThrow(new StorageServiceError());
   });
 
   it("Should return a list of clients", async () => {
