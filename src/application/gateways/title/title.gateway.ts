@@ -4,7 +4,7 @@ import { ResourceNotFoundError, StorageServiceError } from "../../../shared/erro
 
 export interface TitleGateway {
   create(title: Title): Promise<Either<ResourceNotFoundError | StorageServiceError, Title>>;
-  findAll(): Promise<Title[]>;
+  findAll(): Promise<Either<ResourceNotFoundError | StorageServiceError, Title[]>>;
   findBySubject(subjectToSearch: string): Promise<Either<ResourceNotFoundError | StorageServiceError, Title[]>>;
   findByAuthor(authorToSearch: string): Promise<Either<ResourceNotFoundError | StorageServiceError, Title[]>>;
   findByIsbnCode(isbnToSearch: number): Promise<Either<ResourceNotFoundError | StorageServiceError, Title>>;

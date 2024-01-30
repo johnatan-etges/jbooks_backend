@@ -15,7 +15,7 @@ export class TitleInMemoryGateway implements TitleGateway {
     return right(titleToBeCreated);
   }
 
-  async findAll(): Promise<Title[]> {
+  async findAll(): Promise<Either<ResourceNotFoundError | StorageServiceError, Title[]>> {
     const clonedTitles: Title[] = [];
     
     TitleInMemoryGateway.titles.forEach(title => {
@@ -24,7 +24,11 @@ export class TitleInMemoryGateway implements TitleGateway {
       );
     });
 
-    return clonedTitles;
+    if (clonedTitles.length === 0) {
+      return left(new ResourceNotFoundError("Title"));
+    }
+
+    return right(clonedTitles);
   }
 
   async findBySubject(subjectToSearch: string): Promise<Either<ResourceNotFoundError | StorageServiceError,  Title[]>> {

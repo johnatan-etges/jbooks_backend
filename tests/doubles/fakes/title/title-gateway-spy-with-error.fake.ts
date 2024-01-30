@@ -8,8 +8,8 @@ export class TitleInMemoryGatewaySpyWithError implements TitleGateway {
     return left(new StorageServiceError());
   }
 
-  async findAll(): Promise<Title[]> {
-    throw new Error();
+  async findAll(): Promise<Either<StorageServiceError, Title[]>> {
+    return left(new StorageServiceError());
   }
 
   async findBySubject(subjectToSearch: string): Promise<Either<StorageServiceError, Title[]>> {

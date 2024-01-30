@@ -1,5 +1,6 @@
 import { Title } from "../../../enterprise/entities/title/title";
-import { StorageServiceError } from "../../../shared/errors";
+import { Either, left, right } from "../../../shared/either";
+import { ResourceNotFoundError, StorageServiceError } from "../../../shared/errors";
 import { TitleGateway } from "../../gateways/title/title.gateway";
 
 export class FindAllTitlesUseCase {
@@ -9,13 +10,16 @@ export class FindAllTitlesUseCase {
     this._titleGateway = titleGateway;
   }
 
-  async execute(): Promise<Title[]> {
-    try {
-      const titles = await this._titleGateway.findAll();
-  
-      return titles;
-    } catch(err) {
-        throw new StorageServiceError();
+  async execute(): Promise<Either<ResourceNotFoundError | StorageServiceError, Title[]>> {
+    const titlesOrError = await this._titleGateway.findAll();
+
+    if (titlesOrError.isLeft()) {
+      return left(titlesOrError.value);
     }
+
+    const foundTitles = titlesOrError.value;
+  
+    return right(foundTitles);
+    
   }
 }
