@@ -44,7 +44,7 @@ export class TitleInMemoryGateway implements TitleGateway {
     return right(foundTitles);
   }
 
-  async findByAuthor(authorToSearch: string): Promise<Title[]> {
+  async findByAuthor(authorToSearch: string): Promise<Either<ResourceNotFoundError, Title[]>> {
       const foundTitles: Title[] = [];
 
       TitleInMemoryGateway.titles.forEach(title => {
@@ -55,7 +55,11 @@ export class TitleInMemoryGateway implements TitleGateway {
         }
       });
 
-      return foundTitles;
+      if (foundTitles.length === 0) {
+        return left(new ResourceNotFoundError("Title"));
+      }
+
+      return right(foundTitles);
   }
 
   async findByIsbnCode(isbnToSearch: number): Promise<Either<ResourceNotFoundError, Title>> {

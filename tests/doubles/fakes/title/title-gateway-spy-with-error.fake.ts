@@ -16,8 +16,8 @@ export class TitleInMemoryGatewaySpyWithError implements TitleGateway {
     return left(new StorageServiceError());
   }
 
-  async findByAuthor(authorToSearch: string): Promise<Title[]> {
-    throw new Error();
+  async findByAuthor(authorToSearch: string): Promise<Either<StorageServiceError, Title[]>> {
+    return left(new StorageServiceError());
   }
 
   async findByIsbnCode(isbnToSearch: number): Promise<Either<StorageServiceError, Title>> {

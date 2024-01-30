@@ -6,6 +6,6 @@ export interface TitleGateway {
   create(title: Title): Promise<void>;
   findAll(): Promise<Title[]>;
   findBySubject(subjectToSearch: string): Promise<Either<ResourceNotFoundError | StorageServiceError, Title[]>>;
-  findByAuthor(authorToSearch: string): Promise<Title[]>;
+  findByAuthor(authorToSearch: string): Promise<Either<ResourceNotFoundError | StorageServiceError, Title[]>>;
   findByIsbnCode(isbnToSearch: number): Promise<Either<ResourceNotFoundError | StorageServiceError, Title>>;
 }

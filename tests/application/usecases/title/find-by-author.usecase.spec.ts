@@ -1,50 +1,46 @@
 import { CreateTitleUseCase } from "../../../../src/application/usecases/title/create-title.usecase";
 import { FindByAuthorUseCase } from "../../../../src/application/usecases/title/find-by-author.usecase";
 import { Title } from "../../../../src/enterprise/entities/title/title";
-import { InvalidParamError } from "../../../../src/shared/errors";
-import { StorageServiceError } from "../../../../src/shared/errors";
+import { InvalidParamError, ResourceNotFoundError, StorageServiceError } from "../../../../src/shared/errors";
 import { anyAuthorSearchExpression, invalidAuthorSearchExpression, shortAuthorSearchExpression, validAuthorSearchExpressions, validTitle } from "../../../doubles/assets/title/index.assets";
 import { makeTitleGatewaySpy, makeTitleGatewaySpyWithError } from "../../../doubles/fakes/title";
 
-describe("FindByAuthorUseCase", () =>  {
-  it("Should  throw if dependecy throws", async () => {
-    const sut = new FindByAuthorUseCase(makeTitleGatewaySpyWithError());
-    const promise =  sut.execute(anyAuthorSearchExpression);
+const titleGatewaySpy = makeTitleGatewaySpy();
 
-    await expect(promise).rejects.toThrow(new StorageServiceError());
+describe("FindByAuthorUseCase", () =>  {
+  it("Should return StorageServiceError if dependecy throws", async () => {
+    const sut = new FindByAuthorUseCase(makeTitleGatewaySpyWithError());
+    const promise =  (await sut.execute(anyAuthorSearchExpression)).value as Error;
+
+    expect(promise).toEqual(new StorageServiceError());
   });
 
   it("Should return InvalidParamError if search expression is lesser than 3 characters long", async () => {
-    const sut = new FindByAuthorUseCase(makeTitleGatewaySpy());
-    const promise = sut.execute(shortAuthorSearchExpression);
+    const sut = new FindByAuthorUseCase(titleGatewaySpy);
+    const promise = (await sut.execute(shortAuthorSearchExpression)).value as Error;
 
-    await expect(promise).rejects.toThrow(new InvalidParamError("Search expression"));
+    expect(promise).toEqual(new InvalidParamError("Search expression"));
   })
 
+  it("Should return ResourceNotFoundError if a invalid search expression is provided", async () => {
+    const sut = new FindByAuthorUseCase(titleGatewaySpy);
+    const expectedTitles: Title[]  = [];
+    const promise = (await sut.execute(invalidAuthorSearchExpression)).value as Error;
+
+    expect(promise).toEqual(new ResourceNotFoundError("Title"));
+  });
+
   it("Should return a list the found titles based  on a list of valid search expressions", async () => {
-    const titleInMemoryGateway =  makeTitleGatewaySpy();
-    const sut = new FindByAuthorUseCase(titleInMemoryGateway);
-    const createTitleUseCase = new CreateTitleUseCase(titleInMemoryGateway);
+    const sut = new FindByAuthorUseCase(titleGatewaySpy);
+    const createTitleUseCase = new CreateTitleUseCase(titleGatewaySpy);
     
     await createTitleUseCase.execute(validTitle);
     const expectedTitles = [validTitle];
 
     validAuthorSearchExpressions.forEach(async (validAuthorSearchExpression) => {
-      const actualTitles = await sut.execute(validAuthorSearchExpression);
+      const actualTitles: Title[] = (await sut.execute(validAuthorSearchExpression)).value as Title[] ;
 
       expect(actualTitles).toEqual(expectedTitles);
     });
-  });
-
-  it("Should return a empty list if a invalid search expression is provided", async () => {
-    const titleInMemoryGateway = makeTitleGatewaySpy();
-    const sut = new FindByAuthorUseCase(titleInMemoryGateway);
-    const createTitleUseCase = new CreateTitleUseCase(titleInMemoryGateway);
-    await createTitleUseCase.execute(validTitle);
-
-    const expectedTitles: Title[]  = [];
-    const actualTitles = await sut.execute(invalidAuthorSearchExpression);
-
-    expect(actualTitles).toEqual(expectedTitles);
   });
 });

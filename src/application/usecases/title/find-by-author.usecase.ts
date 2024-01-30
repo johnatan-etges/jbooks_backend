@@ -1,5 +1,6 @@
 import { Title } from "../../../enterprise/entities/title/title";
-import { InvalidParamError } from "../../../shared/errors";
+import { Either, left, right } from "../../../shared/either";
+import { InvalidParamError, ResourceNotFoundError } from "../../../shared/errors";
 import { StorageServiceError } from "../../../shared/errors";
 import { TitleGateway } from "../../gateways/title/title.gateway";
 
@@ -10,16 +11,19 @@ export class FindByAuthorUseCase {
     this._titleGateway = titleGateway;
   }
 
-  async execute(authorToSearch: string): Promise<Title[]> {
+  async execute(authorToSearch: string): Promise<Either<InvalidParamError | ResourceNotFoundError | StorageServiceError , Title[]>> {
     if (authorToSearch.length < 3) {
-      throw new  InvalidParamError("Search expression");
+      return left(new  InvalidParamError("Search expression"));
     }
-    try {
-      const foundTitles = await this._titleGateway.findByAuthor(authorToSearch);
 
-      return foundTitles;
-    } catch(err) {
-      throw new StorageServiceError();
+    const titlesOrError = await this._titleGateway.findByAuthor(authorToSearch);
+    
+    if (titlesOrError.isLeft()) {
+      return left(titlesOrError.value);
     }
+
+    const foundTitles: Title[] = titlesOrError.value;
+
+    return right (foundTitles);
   }
 }
