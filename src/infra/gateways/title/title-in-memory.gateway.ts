@@ -1,7 +1,7 @@
 import { Title } from "../../../enterprise/entities/title/title";
 import { TitleGateway } from "../../../application/gateways/title/title.gateway";
 import { Either, left, right } from "../../../shared/either";
-import { ResourceNotFoundError } from "../../../shared/errors";
+import { ResourceNotFoundError, StorageServiceError } from "../../../shared/errors";
 
 export class TitleInMemoryGateway implements TitleGateway {
   private static titles: Title[] = [];
@@ -26,7 +26,7 @@ export class TitleInMemoryGateway implements TitleGateway {
     return clonedTitles;
   }
 
-  async findBySubject(subjectToSearch: string): Promise<Title[]> {
+  async findBySubject(subjectToSearch: string): Promise<Either<ResourceNotFoundError | StorageServiceError,  Title[]>> {
     const foundTitles: Title[] = [];
 
     TitleInMemoryGateway.titles.forEach(title => {
@@ -37,7 +37,11 @@ export class TitleInMemoryGateway implements TitleGateway {
       }
     });
 
-    return foundTitles;
+    if (foundTitles.length === 0) {
+      return left(new ResourceNotFoundError("Title"));
+    }
+
+    return right(foundTitles);
   }
 
   async findByAuthor(authorToSearch: string): Promise<Title[]> {

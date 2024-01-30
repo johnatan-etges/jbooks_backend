@@ -12,8 +12,8 @@ export class TitleInMemoryGatewaySpyWithError implements TitleGateway {
     throw new Error();
   }
 
-  async findBySubject(subjectToSearch: string): Promise<Title[]> {
-    throw new Error();
+  async findBySubject(subjectToSearch: string): Promise<Either<StorageServiceError, Title[]>> {
+    return left(new StorageServiceError());
   }
 
   async findByAuthor(authorToSearch: string): Promise<Title[]> {
