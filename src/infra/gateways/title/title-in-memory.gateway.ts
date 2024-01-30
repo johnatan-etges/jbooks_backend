@@ -6,12 +6,13 @@ import { ResourceNotFoundError, StorageServiceError } from "../../../shared/erro
 export class TitleInMemoryGateway implements TitleGateway {
   private static titles: Title[] = [];
 
-  async create(title: Title): Promise<void> {
+  async create(title: Title): Promise<Either<StorageServiceError, Title>> {
+    const titleToBeCreated = new Title(title.isbn, title.author, title.subject, title.copiesInStock);
     TitleInMemoryGateway.titles.push(
-      new Title(title.isbn, title.author, title.subject, title.copiesInStock)
+      titleToBeCreated
     );
 
-    return Promise.resolve();
+    return right(titleToBeCreated);
   }
 
   async findAll(): Promise<Title[]> {

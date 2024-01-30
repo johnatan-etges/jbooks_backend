@@ -20,8 +20,6 @@ describe("FindByIsbnCodeUseCase", () => {
 
   it("Should return ResourceNotFoundError if an invalid ISBN code is provided", async () => {
     const sut = new FindByIsbnCodeUseCase(titleGatewaySpy);
-    const createdTitle = await createTitleUseCase.execute(validTitle);
-
     const promise = (await sut.execute(invalidIsbn)).value as Error;
 
     expect(promise).toEqual(new ResourceNotFoundError("Title"));
@@ -29,10 +27,9 @@ describe("FindByIsbnCodeUseCase", () => {
 
   it("Should return the found Title if a valid ISBN is provided", async () => {
     const sut = new FindByIsbnCodeUseCase(titleGatewaySpy);
-    const createdTitle = await createTitleUseCase.execute(validTitle);
-
+    await createTitleUseCase.execute(validTitle);
     const actualTitle: Title = (await sut.execute(validIsbn)).value as Title;
 
-    expect(actualTitle).toEqual(createdTitle);
+    expect(actualTitle).toEqual(validTitle);
   });
 });

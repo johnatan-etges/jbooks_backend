@@ -4,8 +4,8 @@ import { Either, left } from "../../../../src/shared/either";
 import { StorageServiceError } from "../../../../src/shared/errors";
 
 export class TitleInMemoryGatewaySpyWithError implements TitleGateway {
-  async create(title: Title): Promise<void> {
-    throw new Error();    
+  async create(title: Title): Promise<Either<StorageServiceError, Title>> {
+    return left(new StorageServiceError());
   }
 
   async findAll(): Promise<Title[]> {

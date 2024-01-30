@@ -1,5 +1,7 @@
+import { InvalidNumberOfCopiesError } from '../../../enterprise/entities/title/errors/invalid-number-of-copies-error';
 import { Title } from '../../../enterprise/entities/title/title'
-import { StorageServiceError } from '../../../shared/errors';
+import { Either, left, right } from '../../../shared/either';
+import { ResourceNotFoundError, StorageServiceError } from '../../../shared/errors';
 import { TitleGateway } from "../../gateways/title/title.gateway";
 
 export class CreateTitleUseCase {
@@ -9,13 +11,15 @@ export class CreateTitleUseCase {
     this._titleGateway = titleGateway;
   }
 
-  async execute(title: Title): Promise<Title> {
-    try {
-      await this._titleGateway.create(title);
+  async execute(title: Title): Promise<Either<ResourceNotFoundError | StorageServiceError, Title>> {
+      const titleOrError = await this._titleGateway.create(title);
 
-      return title;
-    } catch(err) {
-      throw new StorageServiceError();
-    }
+      if (titleOrError.isLeft()) {
+        return left(titleOrError.value);
+      }
+
+      const createdTitle: Title = titleOrError.value;
+
+      return right(createdTitle);
   }
 }

@@ -3,7 +3,7 @@ import { Either } from "../../../shared/either";
 import { ResourceNotFoundError, StorageServiceError } from "../../../shared/errors";
 
 export interface TitleGateway {
-  create(title: Title): Promise<void>;
+  create(title: Title): Promise<Either<ResourceNotFoundError | StorageServiceError, Title>>;
   findAll(): Promise<Title[]>;
   findBySubject(subjectToSearch: string): Promise<Either<ResourceNotFoundError | StorageServiceError, Title[]>>;
   findByAuthor(authorToSearch: string): Promise<Either<ResourceNotFoundError | StorageServiceError, Title[]>>;
