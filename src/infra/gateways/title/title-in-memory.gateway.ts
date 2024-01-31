@@ -82,4 +82,10 @@ export class TitleInMemoryGateway implements TitleGateway {
 
       return right(foundTitle);
   }
+
+  async remove(titleToRemove: Title): Promise<Either<StorageServiceError, Title>> {
+    TitleInMemoryGateway.titles = TitleInMemoryGateway.titles.filter(title => title !== titleToRemove);
+
+    return right(titleToRemove);
+  }
 }

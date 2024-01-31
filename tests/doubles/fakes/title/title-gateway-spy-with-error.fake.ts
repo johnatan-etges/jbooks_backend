@@ -21,5 +21,10 @@ export class TitleInMemoryGatewaySpyWithError implements TitleGateway {
   }
 
   async findByIsbnCode(isbnToSearch: number): Promise<Either<StorageServiceError, Title>> {
-    return left(new StorageServiceError());  }
+    return left(new StorageServiceError());
+  }
+
+  async remove(title: Title): Promise<Either<StorageServiceError, Title>> {
+    return left(new StorageServiceError());      
+  }
 }

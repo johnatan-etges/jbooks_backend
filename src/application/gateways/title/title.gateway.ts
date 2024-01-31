@@ -8,4 +8,5 @@ export interface TitleGateway {
   findBySubject(subjectToSearch: string): Promise<Either<ResourceNotFoundError | StorageServiceError, Title[]>>;
   findByAuthor(authorToSearch: string): Promise<Either<ResourceNotFoundError | StorageServiceError, Title[]>>;
   findByIsbnCode(isbnToSearch: number): Promise<Either<ResourceNotFoundError | StorageServiceError, Title>>;
+  remove(title: Title): Promise<Either<StorageServiceError, Title>>;
 }
