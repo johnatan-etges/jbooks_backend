@@ -1,50 +1,14 @@
-import { InvalidParamError } from "../../../shared/errors";
-import { InvalidDocumentTypeError } from "./errors/invalid-document-type-error";
+import { Either } from "../../../shared/either";
+import { ClientData } from "./client-data";
+import { InvalidCpfError, InvalidCnpjError, InvalidPhoneError } from "./errors";
+import { Phone } from "./phone-number.valueobject";
 
-export class Client {
-  private _document: number;
-  private _clientType: number;
-  private _phoneNumber: number;
+export abstract class Client {
+  public readonly _phoneNumber: Phone;
 
-  constructor(
-    document: number,
-    type: number,
-    phone: number
-  ) {
-    if (![11, 14].includes(document.toString().length)) {
-      throw new InvalidParamError("Document");
-    }
-
-    if (![1, 2].includes(type)) {
-      throw new InvalidParamError("Document type");
-    }
-
-    if (phone.toString().length !== 11) {
-      throw new InvalidParamError("Phone number");
-    }
-
-    if (type === 2 && document.toString().length === 11) {
-      throw new InvalidDocumentTypeError("CNPJ");
-    }
-
-    if (type === 1 && document.toString().length === 14) {
-      throw new InvalidDocumentTypeError("CPF");
-    }
-
-    this._document = document;
-    this._clientType = type;
+  constructor(phone: Phone) {
     this._phoneNumber = phone;
   }
 
-  get document(): number {
-    return this._document;
-  }
-
-  get clientType(): number {
-    return this._clientType;
-  }
-
-  get phoneNumber(): number {
-    return this._phoneNumber;
-  }
+  abstract create(clientData: ClientData): Either<InvalidCpfError | InvalidCnpjError | InvalidPhoneError, Client>;
 }
