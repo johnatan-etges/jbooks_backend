@@ -1,4 +1,4 @@
-import { Subject } from "../../../src/enterprise/entities/subject.valueobject";
+import { Subject } from "../../../src/enterprise/entities/title/subject.valueobject";
 import { InvalidParamError } from "../../../src/shared/errors";
 
 describe("Book Subject", () => {

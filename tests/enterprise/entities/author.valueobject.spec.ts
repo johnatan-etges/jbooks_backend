@@ -1,4 +1,4 @@
-import { Author } from "../../../src/enterprise/entities/author.valueobject";
+import { Author } from "../../../src/enterprise/entities/title/author.valueobject";
 import { InvalidParamError } from "../../../src/shared/errors";
 
 describe("Author", () => {
